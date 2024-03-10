@@ -1,5 +1,7 @@
 
 /**
+Brute Force Approach
+
 Time complexity: O(m*n(m+n))
 Space complexity: O(m*n)
 */
@@ -44,6 +46,8 @@ class Solution {
 
 
 /**
+Using HashTable
+
 Space complexity O(m+n)
 Time complexity O(m*n)
 */
@@ -79,5 +83,86 @@ class Solution {
         }
     }
 }
+
+
+
+/**
+Using In-Place Hashing
+
+Time complexity:  O(m*n)
+Space complexity: O(1)
+*/
+
+
+class Solution {
+    public void setZeroes(int[][] arr) {
+
+        int m = arr.length;
+        int n = arr[0].length;
+
+        boolean firstRow = false;
+        boolean firstCol = false;
+
+        for (int i=0;i<n;i++) {
+            if ( arr[0][i] == 0) 
+                firstRow = true;
+        }
+
+        for (int i=0;i<m;i++) {
+            if (arr[i][0] == 0)
+                firstCol = true;
+        }
+            
+        for (int i=0;i<m;i++) {
+            for (int j=0;j<n;j++) {
+                if (arr[i][j] == 0) {
+                    arr[0][j] = 0;
+                    arr[i][0] = 0;
+                }
+            }
+        } 
+
+        System.out.println(Arrays.toString(arr[0]));
+
+        for (int i=1;i<m;i++) {
+            for (int j=1;j<n;j++) {
+                if (arr[0][j] == 0 || arr[i][0] == 0) {
+                    arr[i][j] = 0;
+                }
+            }
+        }
+
+        if (firstRow == true) {
+            for (int i=0;i<n;i++) {
+                arr[0][i] = 0;
+            }
+        }
+
+        if (firstCol == true) {
+            for (int i=0;i<m;i++) {
+                arr[i][0] = 0;
+            } 
+        }
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
